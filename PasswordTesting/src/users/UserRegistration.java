@@ -60,7 +60,7 @@ public class UserRegistration {
 		}
 		
 		for (int i = 0; i < users.length; i++) {
-			if (users[i].getUsername() == username) {
+			if (users[i].getUsername().equals(username)) {
 				return true;
 			}
 		}
@@ -97,8 +97,8 @@ public class UserRegistration {
 	
 	public boolean passwordMatch(String username, String password) {
 		for (int i = 0; i < users.length; i++) {
-			if (users[i].getUsername() == username) {
-				if (users[i].getPassword() == password) {
+			if (users[i].getUsername().equals(username)) {
+				if (users[i].getPassword().equals(password)) {
 					return true;
 				} else {
 					return false;

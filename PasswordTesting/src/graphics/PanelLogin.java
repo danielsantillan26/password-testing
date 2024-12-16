@@ -97,6 +97,7 @@ public class PanelLogin extends JPanel {
 				String password = String.valueOf(fieldPassword.getPassword());
 				
 				failed.setText("");
+				failed.setForeground(Color.RED);
 				
 				if (password.length() < 8) {
 					failed.setText("Password too short: must be at least 8 characters");
@@ -165,11 +166,15 @@ public class PanelLogin extends JPanel {
 				
 				UserRegistration ur = new UserRegistration();
 				if (ur.doesUserExist(username, password)) {
-					if (ur.doesUserExist(username, password)) {
+					if (ur.passwordMatch(username, password)) {
+						failed.setForeground(new Color(34, 139, 34));
 						failed.setText("Logged in!");
 					} else {
 						failed.setText("Wrong password.");
 					}
+				} else {
+					failed.setForeground(new Color(34, 139, 34));
+					failed.setText("Account created. Welcome!");
 				}
 			
 			}

@@ -15,6 +15,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import users.UserRegistration;
+
 public class PanelLogin extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -157,6 +159,16 @@ public class PanelLogin extends JPanel {
 					if (password.charAt(i) ==(' ')) {
 						failed.setText("Password illegal: cannot have spaces");
 						return;
+					}
+				}
+				
+				
+				UserRegistration ur = new UserRegistration();
+				if (ur.doesUserExist(username, password)) {
+					if (ur.doesUserExist(username, password)) {
+						failed.setText("Logged in!");
+					} else {
+						failed.setText("Wrong password.");
 					}
 				}
 			

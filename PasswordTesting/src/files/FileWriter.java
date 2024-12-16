@@ -12,6 +12,7 @@ public class FileWriter extends File {
 	private PrintWriter writer;
 	private static final long serialVersionUID = 1L;
 	
+	
 	public FileWriter(String pathname) {
 		super(pathname);
 	}
@@ -19,6 +20,7 @@ public class FileWriter extends File {
 	public FileWriter(String parent, String child) {
 		super(parent, child);
 	}
+	
 	
 	
 	public boolean openForReading() {
@@ -33,6 +35,7 @@ public class FileWriter extends File {
 	}
 	
 	
+	
 	public boolean openForWriting() {
 		try {
 			writer = new PrintWriter(this);
@@ -45,10 +48,12 @@ public class FileWriter extends File {
 	}
 	
 	
+	
 	public void close() {
 		if (scanner != null) { scanner.close(); }
 		if (writer != null) { writer.close(); }
 	}
+	
 	
 	
 	public int numLines() {
@@ -64,6 +69,7 @@ public class FileWriter extends File {
 		close();
 		return lines;
 	}
+	
 	
 	
 	public String[] readToArray() {

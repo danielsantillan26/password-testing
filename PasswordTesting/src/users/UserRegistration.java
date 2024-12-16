@@ -1,21 +1,33 @@
 package users;
 
-import java.io.FileNotFoundException;
-
 import files.FileWriter;
 
+/**
+ * The UserRegistration class handles the preparation of the array of users
+ * based on the information in users.txt. It also has methods to add new users
+ * and determine whether a username and password match for login.
+ * 
+ * @author Daniel Santillan
+ */
 public class UserRegistration {
 
+	// filename and user array
 	private static final String filename = "users.txt";
 	private static User[] users;
 
 
+	/**
+	 * This is a blank constructor.
+	 */
 	public UserRegistration() {
 		
 	}
 
 	
-	@SuppressWarnings("unused")
+	/**
+	 * The collectUsers method creates a file, reads it, and creates the users
+	 * array based on the file reading.
+	 */
 	public void collectUsers() {
 		FileWriter file = new FileWriter(filename);
 		
@@ -23,8 +35,6 @@ public class UserRegistration {
 		if (existingUsers == null) { return; }
 		
 		users = new User[existingUsers.length/2];
-		
-		if (existingUsers == null) { return; }
 		
 		for (int i = 0; i < existingUsers.length; i+=2) {
 			users[i/2] = new User(existingUsers[i], existingUsers[i + 1]);
@@ -34,6 +44,10 @@ public class UserRegistration {
 	}
 	
 	
+	/**
+	 * The archiveUsers method creates a String array based on the Users array
+	 * and writes the new String array on the fresh file.
+	 */
 	public void archiveUsers() {
 		if (users == null) { return; }
 		FileWriter file = new FileWriter(filename);
@@ -50,6 +64,15 @@ public class UserRegistration {
 	}
 	
 	
+	/**
+	 * The doesUserExist method obtains all the users and uses them to determine
+	 * whether a particular user exists in the database (by username). If not,
+	 * the user is added.
+	 * 
+	 * @param username		proposed username
+	 * @param password		proposed password
+	 * @return				whether the user exists
+	 */
 	public boolean doesUserExist(String username, String password) {
 		collectUsers();
 		
@@ -73,6 +96,13 @@ public class UserRegistration {
 	}
 	
 	
+	/**
+	 * The addUser method adds a new user with the given username and password.
+	 * The users array is reset with a new length to fit the new user.
+	 * 
+	 * @param username		proposed username
+	 * @param password		proposed password
+	 */
 	public void addUser(String username, String password) {
 		User[] temp;
 		
@@ -91,10 +121,18 @@ public class UserRegistration {
 		users[users.length - 1] = new User(username, password);
 		
 		archiveUsers();
-		printUsers();
 	}
 	
 	
+	/**
+	 * The passwordMatch method determines whether a given username has the
+	 * given password. The method is run assuming the username is bound to be
+	 * present in the users array.
+	 * 
+	 * @param username		username
+	 * @param password		proposed password
+	 * @return				does the password match?
+	 */
 	public boolean passwordMatch(String username, String password) {
 		for (int i = 0; i < users.length; i++) {
 			if (users[i].getUsername().equals(username)) {
@@ -108,12 +146,14 @@ public class UserRegistration {
 		
 		return false;
 	}
-	
-	
-	public void printUsers() {
-		for (User u : users) {
-			System.out.println(u);
-		}
+
+
+	/**
+	 * This is the toString method for this class.
+	 */
+	@Override
+	public String toString() {
+		return "UserRegistration []";
 	}
 	
 }
